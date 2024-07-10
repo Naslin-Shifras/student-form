@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f3f3f3;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        select {
+            width: calc(100% - 10px);
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        body {
+            background-image: url(back.jpg);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>STUDENT FORM</h1>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input id="name" type="text"></td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input id="age" type="number"></td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <input id="male" name="gender" type="radio" value="male">Male
+                    <input id="female" name="gender" type="radio" value="female">Female
+                </td>
+            </tr>
+            <tr>
+                <td>Course:</td>
+                <td>
+                    <select name="Course" id="course">
+                        <option value="selectcourse">select your course</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="c++">C++</option>
+                        <option value="html">HTML</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>E-mail:</td>
+                <td><input id="mail" type="email"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button onclick="save()">Save</button></td>
+            </tr>
+        </table>
+        <table id="student-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Course</th>
+                    <th>E-Mail</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="student-table-body"></tbody>
+        </table>
+    </div>
+
+    <script>
+        var table = document.getElementById("student-table");
+        var inname = document.getElementById("name");
+        var inage = document.getElementById("age");
+        var incourse = document.getElementById("course");
+        var inemail = document.getElementById("mail");
+
+        function save() {
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+
+            var row = table.insertRow();
+            var nameCell = row.insertCell(0);
+            var ageCell = row.insertCell(1);
+            var genderCell = row.insertCell(2);
+            var courseCell = row.insertCell(3);
+            var emailCell = row.insertCell(4);
+            var actionCell = row.insertCell(5);
+
+            nameCell.textContent = inname.value;
+            ageCell.textContent = inage.value;
+            genderCell.textContent = gender;
+            courseCell.textContent = incourse.value;
+            emailCell.textContent = inemail.value;
+            actionCell.innerHTML = "<button onclick='del(event)'>Delete</button>";
+        }
+
+        function del(event) {
+            var row = event.target.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+
+</html>
